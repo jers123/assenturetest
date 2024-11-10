@@ -1,0 +1,396 @@
+{
+	"info": {
+		"_postman_id": "7e93468f-3577-4085-b228-31fcb5e2acfd",
+		"name": "Accenture",
+		"description": "Esta es la documentación de la prueba técnica emitida a través de la plataforma Evalart, prueba que es solicitada por la empresa Accenture",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17286642"
+	},
+	"item": [
+		{
+			"name": "Franchise",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"frachiseName\": \"Café Nacional2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/franchise/franchise/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"franchise",
+								"franchise",
+								"create"
+							]
+						},
+						"description": "### Crear Franquicia\n\nEste endpoint permite crear una nueva Franquicia.\n\n#### Request\n\nSe utiliza el método POST de HTTP.\n\n#### Request Body\n\n- `frachiseName` (string, requerido): Es el nombre de la franquicia.\n    \n\n#### Response\n\nEl response es un formato JSON el cual tiene el siguieste esquema:\n\n``` json\n{\n  \"uri\": \"\",\n  \"httpStatus\": \"\",\n  \"error\": true,\n  \"message\": [\"\"],\n  \"date\": \"\",\n  \"response\": {\n    \"frachiseName\": \"\",\n    \"idFranchise\": 0,\n    \"branchs\": [\n      {\n        \"branchName\": \"\",\n        \"idFranchise\": 0,\n        \"idBranch\": 0\n      }\n    ]\n  }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Read All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/franchise/franchise/get-all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"franchise",
+								"franchise",
+								"get-all"
+							]
+						},
+						"description": "### Consultar todas las Franquicias\n\nEste endpoint muestra los datos de todas las franquicias sin las sucursale asociadas\n\n#### Request\n\nSe utiliza el método GET de HTTP.\n\n#### Response\n\nEl response es un formato JSON con el siguiente esquema:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"uri\": {\n            \"type\": \"string\"\n        },\n        \"httpStatus\": {\n            \"type\": \"string\"\n        },\n        \"error\": {\n            \"type\": \"boolean\"\n        },\n        \"message\": {\n            \"type\": \"array\",\n            \"items\": {\n                \"type\": \"string\"\n            }\n        },\n        \"date\": {\n            \"type\": \"string\"\n        },\n        \"response\": {\n            \"type\": \"array\",\n            \"items\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"frachiseName\": {\n                        \"type\": \"string\"\n                    },\n                    \"idFranchise\": {\n                        \"type\": \"integer\"\n                    }\n                }\n            }\n        }\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Read Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/franchise/franchise/get-id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"franchise",
+								"franchise",
+								"get-id",
+								"1"
+							]
+						},
+						"description": "### Consultar una Franquicia por ID\n\nEste endpoint permite consulta las franquisias por ID y muestra las sucursales asociadas, el numero \"1\" que esta al final de la URL se puede reemplazar por otro numero entero siempre que este sea mayor a 0\n\n#### Request\n\nSe utiliza el método GET de HTTP.\n\n#### Response\n\nEl response es un formato JSON con el siguiente esquema:\n\n``` json\n{\n  \"uri\": \"\",\n  \"httpStatus\": \"\",\n  \"error\": true,\n  \"message\": [\"\"],\n  \"date\": \"\",\n  \"response\": {\n    \"frachiseName\": \"\",\n    \"idFranchise\": 0,\n    \"branchs\": [\n      {\n        \"branchName\": \"\",\n        \"idFranchise\": 0,\n        \"idBranch\": 0\n      }\n    ]\n  }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idFranchise\": 6,\r\n    \"frachiseName\": \"Café\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/franchise/franchise/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"franchise",
+								"franchise",
+								"update"
+							]
+						},
+						"description": "### Actualizar Franquicia\n\nEste endpoint permite actualizar una Franquicia especifica.\n\n#### Request\n\nSe utiliza el método PUT de HTTP.\n\n#### Request Body\n\n- `idFranchise` (integer, requerido): Es el ID de la franquicia.\n    \n- `frachiseName` (string, requerido): Es el nombre de la franquicia.\n    \n\n#### Response\n\nEl response es un formato JSON con el siguiente esquema:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"uri\": {\"type\": \"string\"},\n        \"httpStatus\": {\"type\": \"string\"},\n        \"error\": {\"type\": \"boolean\"},\n        \"message\": {\n            \"type\": \"array\",\n            \"items\": {\"type\": \"string\"}\n        },\n        \"date\": {\"type\": \"string\"},\n        \"response\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"frachiseName\": {\"type\": \"string\"},\n                \"idFranchise\": {\"type\": \"number\"},\n                \"branchs\": {\"type\": \"null\"}\n            }\n        }\n    }\n}\n\n ```"
+					},
+					"response": []
+				}
+			],
+			"description": "Contine varios endpoints tanto de crear, consultar y actualizar una Franquicia"
+		},
+		{
+			"name": "Branch",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"branchName\": \"Gym - Villavicencio\",\r\n    \"idFranchise\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/franchise/branch/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"franchise",
+								"branch",
+								"create"
+							]
+						},
+						"description": "### Crear Sucursal\n\nEste endpoint permite crear una nueva Sucursal.\n\n#### Request\n\nSe utiliza el método POST de HTTP.\n\n#### Request Body\n\n- `branchName` (string, requerido): Es el nombre de la sucursal.\n    \n- `idFranchise` (integer, requerido): Es el ID de la franquicia.\n    \n\n#### Response\n\nEl response es un formato JSON el cual tiene el siguieste esquema:\n\n``` json\n{\n  \"uri\": \"\",\n  \"httpStatus\": \"\",\n  \"error\": true,\n  \"message\": [\"\"],\n  \"date\": \"\",\n  \"response\": {\n    \"branchName\": \"\",\n    \"idFranchise\": 0,\n    \"idBranch\": 0,\n    \"products\": null\n  }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Read All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/franchise/branch/get-all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"franchise",
+								"branch",
+								"get-all"
+							]
+						},
+						"description": "### Consultar todas las Sucursales\n\nEste endpoint muestra los datos de todas las sucursales sin los productos asociados\n\n#### Request\n\nSe utiliza el método GET de HTTP.\n\n#### Response\n\nEl response es un formato JSON con el siguiente esquema:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"uri\": {\n            \"type\": \"string\"\n        },\n        \"httpStatus\": {\n            \"type\": \"string\"\n        },\n        \"error\": {\n            \"type\": \"boolean\"\n        },\n        \"message\": {\n            \"type\": \"array\",\n            \"items\": {\n                \"type\": \"string\"\n            }\n        },\n        \"date\": {\n            \"type\": \"string\"\n        },\n        \"response\": {\n            \"type\": \"array\",\n            \"items\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"branchName\": {\n                        \"type\": \"string\"\n                    },\n                    \"idFranchise\": {\n                        \"type\": \"integer\"\n                    },\n                    \"idBranch\": {\n                        \"type\": \"integer\"\n                    }\n                }\n            }\n        }\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Read Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/franchise/branch/get-id/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"franchise",
+								"branch",
+								"get-id",
+								"2"
+							]
+						},
+						"description": "### Consultar una Sucursal por ID\n\nEste endpoint permite consulta las sucursales por ID y muestra los productos asociados, el numero \"2\" que esta al final de la URL se puede reemplazar por otro numero entero siempre que este sea mayor a 0\n\n#### Request\n\nSe utiliza el método GET de HTTP.\n\n#### Response\n\nEl response es un formato JSON con el siguiente esquema:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"uri\": {\"type\": \"string\"},\n        \"httpStatus\": {\"type\": \"string\"},\n        \"error\": {\"type\": \"boolean\"},\n        \"message\": {\n            \"type\": \"array\",\n            \"items\": {\"type\": \"string\"}\n        },\n        \"date\": {\"type\": \"string\"},\n        \"response\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"branchName\": {\"type\": \"string\"},\n                \"idFranchise\": {\"type\": \"integer\"},\n                \"idBranch\": {\"type\": \"integer\"},\n                \"products\": {\n                    \"type\": \"array\",\n                    \"items\": {\n                        \"type\": \"object\",\n                        \"properties\": {\n                            \"productName\": {\"type\": \"string\"},\n                            \"idBranch\": {\"type\": \"integer\"},\n                            \"stock\": {\"type\": \"integer\"},\n                            \"idProduct\": {\"type\": \"integer\"}\n                        }\n                    }\n                }\n            }\n        }\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idBranch\": 5,\r\n    \"branchName\": \"Gym - Cartagena\",\r\n    \"idFranchise\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/franchise/branch/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"franchise",
+								"branch",
+								"update"
+							]
+						},
+						"description": "### Actualizar Sucursal\n\nEste endpoint permite actualizar una Sucursal especifica.\n\n#### Request\n\nSe utiliza el método PUT de HTTP.\n\n#### Request Body\n\n- `idBrach` (integer, requerido): Es el ID de la sucursal.\n    \n- `branchName` (string, requerido): Es el nombre de la sucursal.\n    \n- `idFranchise` (integer, requerido): Es el ID de la franquicia a la que pertenece la sucursal.\n    \n\n#### Response\n\nEl response es un formato JSON con el siguiente esquema:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"uri\": {\n            \"type\": \"string\"\n        },\n        \"httpStatus\": {\n            \"type\": \"string\"\n        },\n        \"error\": {\n            \"type\": \"boolean\"\n        },\n        \"message\": {\n            \"type\": \"array\",\n            \"items\": {\n                \"type\": \"string\"\n            }\n        },\n        \"date\": {\n            \"type\": \"string\"\n        },\n        \"response\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"branchName\": {\n                    \"type\": \"string\"\n                },\n                \"idFranchise\": {\n                    \"type\": \"number\"\n                },\n                \"idBranch\": {\n                    \"type\": \"number\"\n                },\n                \"products\": {\n                    \"type\": [\"array\", \"null\"]\n                }\n            }\n        }\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Read Max Stock Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/franchise/branch/get-stock-product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"franchise",
+								"branch",
+								"get-stock-product",
+								"1"
+							]
+						},
+						"description": "### Consultar Producto con mas stock por Sucursal por Franquicia\n\nEste endpoint permite consultar el producto cn mayor que tiene cada sucursal y aplicar esto a todas las sucursales que tiene una franquicia especifica, el numero \"2\" que esta al final de la URL se puede reemplazar por otro numero entero siempre que este sea mayor a 0\n\n### Response\n\nEl response es un formato JSON con el siguiente esquema:\n\n``` json\n{\n    \"uri\": \"\",\n    \"httpStatus\": \"\",\n    \"error\": true,\n    \"message\": [\"\"],\n    \"date\": \"\",\n    \"response\": {\n        \"frachiseName\": \"\",\n        \"idFranchise\": 0,\n        \"branchs\": [\n            {\n                \"idBranch\": 0,\n                \"branchName\": \"\",\n                \"idProduct\": 0,\n                \"productName\": \"\",\n                \"stock\": 0\n            }\n        ]\n    }\n}\n\n ```"
+					},
+					"response": []
+				}
+			],
+			"description": "Contine varios endpoints tanto de crear, consultar y actualizar una Sucursal"
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productName\": \"Galletas saltinas\",\r\n    \"idBranch\": 1,\r\n    \"stock\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/franchise/product/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"franchise",
+								"product",
+								"create"
+							]
+						},
+						"description": "### Crear Producto\n\nEste endpoint permite crear una nueva Producto.\n\n#### Request\n\nSe utiliza el método POST de HTTP.\n\n#### Request Body\n\n- `productName` (string, requerido): Es el nombre del producto.\n    \n- `idBranch` (integer, requerido): Es el ID de la sucursal a la que pertenece.\n    \n- `stock` (integer, requerido): Es la cantidad del producto existente en la sucursal.\n    \n\n#### Response\n\nEl response es un formato JSON el cual tiene el siguieste esquema:\n\n``` json\n{\n  \"uri\": \"\",\n  \"httpStatus\": \"\",\n  \"error\": true,\n  \"message\": [\"\"],\n  \"date\": \"\",\n  \"response\": {\n    \"productName\": \"\",\n    \"idBranch\": 0,\n    \"stock\": 0,\n    \"idProduct\": 0\n  }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Read All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/franchise/product/get-all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"franchise",
+								"product",
+								"get-all"
+							]
+						},
+						"description": "### Consultar todas los Productos\n\nEste endpoint muestra los datos de todas los productos.\n\n#### Request\n\nSe utiliza el método GET de HTTP.\n\n#### Response\n\nEl response es un formato JSON con el siguiente esquema:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"uri\": {\n            \"type\": \"string\"\n        },\n        \"httpStatus\": {\n            \"type\": \"string\"\n        },\n        \"error\": {\n            \"type\": \"boolean\"\n        },\n        \"message\": {\n            \"type\": \"array\",\n            \"items\": {\n                \"type\": \"string\"\n            }\n        },\n        \"date\": {\n            \"type\": \"string\"\n        },\n        \"response\": {\n            \"type\": \"array\",\n            \"items\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"productName\": {\n                        \"type\": \"string\"\n                    },\n                    \"idBranch\": {\n                        \"type\": \"integer\"\n                    },\n                    \"stock\": {\n                        \"type\": \"integer\"\n                    },\n                    \"idProduct\": {\n                        \"type\": \"integer\"\n                    }\n                }\n            }\n        }\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Read Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/franchise/product/get-id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"franchise",
+								"product",
+								"get-id",
+								"1"
+							]
+						},
+						"description": "### Consultar un Producto por ID\n\nEste endpoint permite consulta los Productos por ID y muestra los productos asociados, el numero \"1\" que esta al final de la URL se puede reemplazar por otro numero entero siempre que este sea mayor a 0\n\n#### Request\n\nSe utiliza el método GET de HTTP.\n\n#### Response\n\nEl response es un formato JSON con el siguiente esquema:\n\n``` json\n{\n    \"uri\": \"\",\n    \"httpStatus\": \"\",\n    \"error\": true,\n    \"message\": [\"\"],\n    \"date\": \"\",\n    \"response\": {\n        \"productName\": \"\",\n        \"idBranch\": 0,\n        \"stock\": 0,\n        \"idProduct\": 0\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idProduct\": 4,\r\n    \"productName\": \"Late1\",\r\n    \"idBranch\": 3,\r\n    \"stock\": 140\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/franchise/product/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"franchise",
+								"product",
+								"update"
+							]
+						},
+						"description": "### Actualizar Producto\n\nEste endpoint permite actualizar un Producto especifico.\n\n#### Request\n\nSe utiliza el método PUT de HTTP.\n\n#### Request Body\n\n- `idProduct` (integer, requerido) - Es el ID del product.\n    \n- `branchName` (string, requerido) - Es el nombre del producto.\n    \n- `idBrach` (integer, requerido) - Es el ID de la sucursala la que pertenece el producto.\n    \n- `stock` (integer, requerido) - Es la cantidad del producto en la sucursal.\n    \n\n#### Response\n\nEl response es un formato JSON con el siguiente esquema:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"uri\": {\"type\": \"string\"},\n        \"httpStatus\": {\"type\": \"string\"},\n        \"error\": {\"type\": \"boolean\"},\n        \"message\": {\n            \"type\": \"array\",\n            \"items\": {\"type\": \"string\"}\n        },\n        \"date\": {\"type\": \"string\"},\n        \"response\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"productName\": {\"type\": \"string\"},\n                \"idBranch\": {\"type\": \"number\"},\n                \"stock\": {\"type\": \"number\"},\n                \"idProduct\": {\"type\": \"number\"}\n            }\n        }\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/franchise/product/delete/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"franchise",
+								"product",
+								"delete",
+								"5"
+							]
+						},
+						"description": "### Eliminar un Producto por ID\n\nEste endpoint permite eliminar un producto por ID , el numero \"5\" que esta al final de la URL se puede reemplazar por otro numero entero siempre que este sea mayor a 0\n\n#### Request\n\nSe utiliza el método DELETE de HTTP.\n\n#### Response\n\nEl response es un formato JSON con el siguiente esquema:\n\n``` json\n{\n    \"uri\": \"\",\n    \"httpStatus\": \"\",\n    \"error\": true,\n    \"message\": [\"\"],\n    \"date\": \"\",\n    \"response\": null\n}\n\n ```"
+					},
+					"response": []
+				}
+			],
+			"description": "Contine varios endpoints tanto de crear, consultar y actualizar un Producto"
+		}
+	]
+}

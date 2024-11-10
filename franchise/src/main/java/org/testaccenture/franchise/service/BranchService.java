@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.testaccenture.franchise.model.dto.branch.BranchCreateDTO;
 import org.testaccenture.franchise.model.dto.branch.BranchOutputDTO;
+import org.testaccenture.franchise.model.dto.branch.BranchProductDTO;
 import org.testaccenture.franchise.model.dto.branch.BranchUpdateDTO;
 import org.testaccenture.franchise.model.entity.Branch;
 import org.testaccenture.franchise.model.entity.Franchise;
@@ -30,11 +31,12 @@ import static org.testaccenture.franchise.utils.SystemConstants.BRANCH_PATH;
 import static org.testaccenture.franchise.utils.SystemConstants.CREATE_PATH;
 import static org.testaccenture.franchise.utils.SystemConstants.GET_ALL_PATH;
 import static org.testaccenture.franchise.utils.SystemConstants.GET_ID_PATH;
+import static org.testaccenture.franchise.utils.SystemConstants.GET_STOCK_PRODUCT_PATH;
 import static org.testaccenture.franchise.utils.SystemConstants.UPDATE_PATH;
 
 @Service
 @Validated
-public class BranchService implements IBaseService<BranchCreateDTO, BranchUpdateDTO, BranchOutputDTO> {
+public class BranchService implements IBranchService {
 
 	@Autowired
 	private IBranchRepository repository;
@@ -138,6 +140,34 @@ public class BranchService implements IBaseService<BranchCreateDTO, BranchUpdate
 		replyMessageSimple.setMessage(messages);
 		replyMessageSimple.setDate(LocalDateTime.now());
 		return replyMessageSimple;
+	}
+	
+	@Override
+	public ReplyMessageSimple<BranchProductDTO> getByMaxStoctProduct(Integer id) {
+		ReplyMessageSimple<BranchProductDTO> replyMessage = new ReplyMessageSimple<>();
+		replyMessage.setUri(getUri(GET_STOCK_PRODUCT_PATH, id));
+		replyMessage.setError(true);
+		replyMessage.setResponse(null);
+		List<String> messages = new ArrayList<>();
+		try {
+			Franchise entity = franchiseRepository.findById(id).orElse(null);
+			if (entity != null) {
+				BranchProductDTO entityDto = mapper.reardSpecial(entity, repository.searchByMaxStockFromProduct(id));
+				replyMessage.setHttpStatus(HttpStatus.OK);
+				replyMessage.setError(false);
+				messages.add(YES_CONTENT);
+				replyMessage.setResponse(entityDto);
+			} else {
+				replyMessage.setHttpStatus(HttpStatus.NOT_FOUND);
+				messages.add(NO_CONTENT_ID + id);
+			}
+		} catch (Exception e) {
+			replyMessage.setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+			messages.add(e.getMessage());
+		}
+		replyMessage.setMessage(messages);
+		replyMessage.setDate(LocalDateTime.now());
+		return replyMessage;
 	}
 
 	@Override

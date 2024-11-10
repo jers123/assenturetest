@@ -18,6 +18,7 @@ public class SystemConstants {
 	public static final String DELETE_PATH = "/delete/";
 	public static final String GET_ALL_PATH = "/get-all";
 	public static final String GET_ID_PATH = "/get-id/";
+	public static final String GET_STOCK_PRODUCT_PATH = "/get-stock-product/";
 	public static final String UPDATE_PATH = "/update";
 
 	// HEADERS
@@ -39,28 +40,40 @@ public class SystemConstants {
 	public static final String NAME = "name";
 	
 	// BRANCH
+	public static final String BRANCH_TABLE = "branch";
+	public static final String FRANCHISE_TABLE = "franchise";
+	public static final String PRODUCT_TABLE = "product";
+	
 	public static final int BRANCH_NAME_LENGTH = 100;
 	public static final String FRANCHISE = "franchise";
 	public static final String BRANCH_NAME_QUERY = "SELECT b.branchName FROM Branch b WHERE LOWER(b.branchName) = LOWER(:" + NAME + ") AND b.idFranchise.idFranchise = :" + FRANCHISE + " AND b.idBranch != :" + ID;
 	public static final String BRANCH_FRANCHISE_QUERY = "SELECT b FROM Branch b WHERE b.idFranchise.idFranchise = :" + ID + " ORDER BY b.branchName ASC";
+	public static final String BRANCH_FRANCHISE_PRODUCT_QUERY = "SELECT b.branch_id, b.branch_name, p.product_id, p.product_name, p.stock "
+			+ "FROM " + SCHEMA + "." + BRANCH_TABLE + " as b "
+			+ "INNER JOIN " + SCHEMA + "." + PRODUCT_TABLE + " as p ON b.branch_id = p.branch_id "
+			+ "INNER JOIN " + SCHEMA + "." + FRANCHISE_TABLE + " as f ON b.franchise_id = f.franchise_id "
+			+ "WHERE f.franchise_id = :" + FRANCHISE + " "
+			+ "AND p.stock = ("
+			+ "	SELECT MAX(p2.stock)"
+			+ "	FROM " + SCHEMA + "." + PRODUCT_TABLE + " AS p2"
+			+ "	WHERE p2.branch_id = b.branch_id"
+			+ ") "
+			+ "ORDER BY b.branch_name ASC;";
 	public static final String BRANCH_ALL_QUERY = "SELECT b FROM Branch b ORDER BY b.idFranchise.idFranchise, b.branchName ASC";
-	public static final String BRANCH_TABLE = "branch";
-
+	
 	// FRANCHISE
 	public static final int FRANCHISE_NAME_LENGTH = 50;
 	public static final String FRANCHISE_NAME_QUERY = "SELECT f.franchiseName FROM Franchise f WHERE LOWER(f.franchiseName) = LOWER(:" + NAME + ") AND f.idFranchise != :" + ID;
 	public static final String FRANCHISE_ALL_QUERY = "SELECT f FROM Franchise f ORDER BY f.franchiseName ASC";
-	public static final String FRANCHISE_TABLE = "franchise";
-
+	
 	// PRODUCT
 	public static final int PRODUCT_NAME_LENGTH = 20;
 	public static final String BRANCH = "branch";
 	public static final String STOCK = "stock";
 	public static final String PRODUCT_NAME_QUERY = "SELECT p.productName FROM Product p WHERE LOWER(p.productName) = LOWER(:" + NAME + ") AND p.idBranch.idBranch = :" + BRANCH + " AND p.idProduct != :" + ID;
 	public static final String PRODUCT_BRANCH_QUERY = "SELECT p FROM Product p WHERE p.idBranch.idBranch = :" + ID + " ORDER BY p.productName ASC";
-	public static final String PRODUCT_ALL_QUERY = "SELECT p FROM Product p ORDER BY p.idBranch.idBranch, p.productName ASC";
-	public static final String PRODUCT_TABLE = "product";
-
+	public static final String PRODUCT_ALL_QUERY = "SELECT p FROM Product p ORDER BY p.idBranch.idFranchise.franchiseName, p.idBranch.branchName, p.productName ASC";
+	
 	public static ResponseEntity<ReplyMessageSimple> answerSimple(ReplyMessageSimple replyMessage) {
 		return ResponseEntity
 				.status(replyMessage.getHttpStatus())

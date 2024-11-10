@@ -9,8 +9,11 @@ import org.testaccenture.franchise.model.dto.branch.BranchCreateDTO;
 import org.testaccenture.franchise.model.dto.branch.BranchOutputDTO;
 import org.testaccenture.franchise.model.dto.branch.BranchUpdateDTO;
 import org.testaccenture.franchise.service.IBaseService;
+import org.testaccenture.franchise.service.IBranchService;
 import org.testaccenture.franchise.utils.response.ReplyMessageList;
 import org.testaccenture.franchise.utils.response.ReplyMessageSimple;
+
+import jakarta.validation.constraints.Min;
 
 import static org.testaccenture.franchise.utils.SystemConstants.API_PATH;
 import static org.testaccenture.franchise.utils.SystemConstants.BRANCH_PATH;
@@ -19,10 +22,10 @@ import static org.testaccenture.franchise.utils.SystemConstants.answerSimple;
 
 @RestApi
 @RequestMapping(path = API_PATH + BRANCH_PATH)
-public class BranchController implements IBaseController<BranchCreateDTO, BranchUpdateDTO> {
+public class BranchController implements IBranchController {
 
 	@Autowired
-	private IBaseService<BranchCreateDTO, BranchUpdateDTO, BranchOutputDTO> service;
+	private IBranchService service;
 
 	@Override
 	public ResponseEntity<ReplyMessageSimple> create(BranchCreateDTO entityDto) {
@@ -46,6 +49,15 @@ public class BranchController implements IBaseController<BranchCreateDTO, Branch
 	public ResponseEntity<ReplyMessageSimple> getById(Integer id) {
 		try {
 			return answerSimple(service.getFindById(id));
+		} catch (DataAccessException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+	}
+	
+	@Override
+	public ResponseEntity<ReplyMessageSimple> getByMaxStoctProduct(Integer id) {
+		try {
+			return answerSimple(service.getByMaxStoctProduct(id));
 		} catch (DataAccessException e) {
 			throw new RuntimeException(e.getMessage());
 		}

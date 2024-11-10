@@ -10,6 +10,7 @@ import org.testaccenture.franchise.model.entity.Branch;
 
 import static org.testaccenture.franchise.utils.SystemConstants.BRANCH_ALL_QUERY;
 import static org.testaccenture.franchise.utils.SystemConstants.BRANCH_NAME_QUERY;
+import static org.testaccenture.franchise.utils.SystemConstants.BRANCH_FRANCHISE_PRODUCT_QUERY;
 import static org.testaccenture.franchise.utils.SystemConstants.BRANCH_FRANCHISE_QUERY;
 import static org.testaccenture.franchise.utils.SystemConstants.FRANCHISE;
 import static org.testaccenture.franchise.utils.SystemConstants.ID;
@@ -22,7 +23,10 @@ public interface IBranchRepository extends JpaRepository<Branch, Integer> {
 
 	@Query(value = BRANCH_NAME_QUERY)
 	String searchByName(@Param(ID) Integer id, @Param(FRANCHISE) Integer idFranchise, @Param(NAME) String name);
-	
+
+	@Query(value = BRANCH_FRANCHISE_PRODUCT_QUERY, nativeQuery = true)
+	List<Object[]> searchByMaxStockFromProduct(@Param(FRANCHISE) Integer idFranchise);
+
 	@Query(value = BRANCH_FRANCHISE_QUERY)
 	List<Branch> searchByFranchise(@Param(ID) Integer id);
 }
